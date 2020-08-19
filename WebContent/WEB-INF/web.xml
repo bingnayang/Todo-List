@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>TodoController</display-name>
+    <servlet-name>TodoController</servlet-name>
+    <servlet-class>in.todo.controller.TodoController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TodoController</servlet-name>
+    <url-pattern>/TodoController</url-pattern>
+  </servlet-mapping>
 </web-app>
