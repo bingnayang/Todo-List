@@ -21,10 +21,10 @@
 			<h1 class="display-4">Todo List</h1>
 		</div>
 		<div class="container">
-			<form action="">
+			<form action="${pageContext.request.contextPath}/TodoController" method="POST">
 				<div class="form-group row">
 					<div class="col-sm-10">
-						<input type="text" class="form-control" placeholder="Enter todo item">
+						<input type="text" class="form-control" placeholder="Enter todo item" name="newItem">
 					</div>
 					<div class="col-sm-2">
 						<button type="submit" class="btn btn-primary">Submit</button>

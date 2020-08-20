@@ -65,4 +65,20 @@ public class TodoDAOImplement implements TodoDAO{
 		return flag;
 	}
 
+	@Override
+	public boolean addItem(Todo item) {
+		boolean flag = false;
+		try {
+			String sql = "INSERT INTO todo (todoItem) " + 
+					"VALUES('"+item.getTodoItem()+"')";
+			connection = DBConnectionUtil.openConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.executeUpdate();
+			flag = true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }

@@ -37,13 +37,21 @@ public class TodoController extends HttpServlet {
 				deleteItem(request,response);
 				break;
 		}
-		
-	
 	}
 
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String newItem = request.getParameter("newItem");
+		System.out.println("New item: "+newItem);
+		
+		Todo item = new Todo();
+		item.setTodoItem(newItem);
+		
+		// Insert new item
+		if(todoDAO.addItem(item)) {
+			System.out.println("Item Added");
+		}
+		response.sendRedirect("TodoController?action=LIST");
+	}
 	
 	public void getItemList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		List<Todo> allList = todoDAO.getList();		
@@ -57,6 +65,7 @@ public class TodoController extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/todo.jsp");
 		// Forward the request and response objects
 		dispatcher.forward(request,response);	
+		
 	}
 	public void deleteItem(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
 		String id = request.getParameter("id");

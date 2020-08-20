@@ -5,5 +5,6 @@ import in.todo.entity.Todo;
 
 public interface TodoDAO {
 	List<Todo> getList();
+	boolean addItem(Todo item);
 	boolean delete(int id);
 }
