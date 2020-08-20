@@ -3,6 +3,7 @@ package in.todo.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,23 @@ public class TodoDAOImplement implements TodoDAO{
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public boolean delete(int id) {
+		String sql = "DELETE FROM todo WHERE todo_Id = "+id;
+		boolean flag = false;
+		try {
+
+			connection = DBConnectionUtil.openConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.executeUpdate();
+			flag = true;
+			
+		}catch(SQLException e) {;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

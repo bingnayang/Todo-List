@@ -32,7 +32,10 @@ public class TodoController extends HttpServlet {
 		switch(action) {
 			case "LIST":
 				getItemList(request,response);
-			break;
+				break;
+			case "DELETE":
+				deleteItem(request,response);
+				break;
 		}
 		
 	
@@ -45,15 +48,25 @@ public class TodoController extends HttpServlet {
 	public void getItemList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		List<Todo> allList = todoDAO.getList();		
 		// Add the book to request object
-		for(Todo item:allList) {
-			System.out.println(item.getTodo_Id());
-			System.out.println(item.getTodoItem());
-		}
+//		for(Todo item:allList) {
+//			System.out.println(item.getTodo_Id());
+//			System.out.println(item.getTodoItem());
+//		}
 		request.setAttribute("allList",allList);
 		// Get the request dispatcher
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/todo.jsp");
 		// Forward the request and response objects
 		dispatcher.forward(request,response);	
 	}
-
+	public void deleteItem(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
+		String id = request.getParameter("id");
+		System.out.println("Delete item ID: "+id);
+		
+		if(todoDAO.delete(Integer.parseInt(id))){
+			System.out.println("Item Delete");
+		}
+		// Get update todo item list
+//		getItemList(request,response);
+		response.sendRedirect("TodoController?action=LIST");
+	}
 }

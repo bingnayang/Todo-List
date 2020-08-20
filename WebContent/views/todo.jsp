@@ -17,24 +17,37 @@
 </head>
 <body>
 	<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Todo List</h1>
-  </div>
-</div>
-	
+		<div class="container">
+			<h1 class="display-4">Todo List</h1>
+		</div>
+		<div class="container">
+			<form action="">
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<input type="text" class="form-control" placeholder="Enter todo item">
+					</div>
+					<div class="col-sm-2">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
 	<div class="container">
 		<c:forEach items="${allList}" var="item">
-			<li class="list-group-item d-flex justify-content-between align-items-center">
+			<li
+				class="list-group-item d-flex justify-content-between align-items-center">
 				${item.todoItem}
-  				<div>
- 						<a type="button" class="btn btn-outline-info btn-sm"
+				<div>
+					<a type="button" class="btn btn-outline-info btn-sm"
 						href="${pageContext.request.contextPath}/TodoController?action=EDIT&id=${item.todo_Id}">Edit</a>
-						/ <a type="button" class="btn btn-outline-danger btn-sm"
+					/ <a type="button" class="btn btn-outline-danger btn-sm"
 						href="${pageContext.request.contextPath}/TodoController?action=DELETE&id=${item.todo_Id}">Delete</a>
 				</div>
 			</li>
 		</c:forEach>
 	</div>
-	
+
 </body>
 </html>
