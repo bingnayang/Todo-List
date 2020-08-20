@@ -1,14 +1,14 @@
 package in.todo.entity;
 
 public class Todo {
-	private int todo_id;
+	private int todo_Id;
 	private String todoItem;
 	
-	public int getTodo_id() {
-		return todo_id;
+	public int getTodo_Id() {
+		return todo_Id;
 	}
-	public void setTodo_id(int todo_id) {
-		this.todo_id = todo_id;
+	public void setTodo_Id(int todo_Id) {
+		this.todo_Id = todo_Id;
 	}
 	public String getTodoItem() {
 		return todoItem;
@@ -16,6 +16,5 @@ public class Todo {
 	public void setTodoItem(String todoItem) {
 		this.todoItem = todoItem;
 	}
-	
 	
 }

@@ -35,9 +35,8 @@ public class TodoDAOImplement implements TodoDAO{
 			// Process the resultSet
 			while(resultSet.next()) {
 				item = new Todo();
-				item.setTodo_id(resultSet.getInt("todo_Id"));
+				item.setTodo_Id(resultSet.getInt("todo_Id"));
 				item.setTodoItem(resultSet.getString("todoItem"));
-
 				// Add item to list
 				list.add(item);
 			}
