@@ -22,12 +22,13 @@
 		</div>
 		<div class="container">
 			<form action="${pageContext.request.contextPath}/TodoController" method="POST">
-				<div class="form-group row">
-					<div class="col-sm-10">
-						<input type="text" class="form-control" placeholder="Enter todo item" name="newItem">
+				<div class="row">
+					<div class="col-10">
+						<input type="text" class="form-control" placeholder="Enter todo item" name="newItem" value="${item.todoItem}">
+						<input type="hidden" class="form-control" name="itemId" value="${item.todo_Id}">
 					</div>
-					<div class="col-sm-2">
-						<button type="submit" class="btn btn-primary">Submit</button>
+					<div class="col-2">
+						<button type="submit" class="btn btn-primary btn-block">Submit</button>
 					</div>
 				</div>
 			</form>

@@ -33,6 +33,9 @@ public class TodoController extends HttpServlet {
 			case "LIST":
 				getItemList(request,response);
 				break;
+			case "EDIT":
+				editItem(request,response);
+				break;
 			case "DELETE":
 				deleteItem(request,response);
 				break;
@@ -41,21 +44,28 @@ public class TodoController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String newItem = request.getParameter("newItem");
-		System.out.println("New item: "+newItem);
-		
+		String id = request.getParameter("itemId");
+
 		Todo item = new Todo();
 		item.setTodoItem(newItem);
 		
-		// Insert new item
-		if(todoDAO.addItem(item)) {
-			System.out.println("Item Added");
+		if(id.isEmpty() || id == null) {
+			// Insert new item
+			if(todoDAO.addItem(item)) {
+				System.out.println("Item Added");
+			}
+		}else {
+			// Update item
+			item.setTodo_Id(Integer.parseInt(id));
+			if(todoDAO.updateItem(item)) {
+				System.out.println("Item Update");
+			}
 		}
 		response.sendRedirect("TodoController?action=LIST");
 	}
 	
 	public void getItemList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		List<Todo> allList = todoDAO.getList();		
-		// Add the book to request object
 //		for(Todo item:allList) {
 //			System.out.println(item.getTodo_Id());
 //			System.out.println(item.getTodoItem());
@@ -75,7 +85,23 @@ public class TodoController extends HttpServlet {
 			System.out.println("Item Delete");
 		}
 		// Get update todo item list
-//		getItemList(request,response);
 		response.sendRedirect("TodoController?action=LIST");
+	}
+	public void editItem(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException{
+			
+		String id = request.getParameter("id");
+		System.out.println("Edit item ID: "+id);
+		
+		Todo item = todoDAO.editItem(Integer.parseInt(id));	
+		request.setAttribute("item",item);
+		// Also display the todo list
+		List<Todo> allList = todoDAO.getList();		
+		request.setAttribute("allList",allList);
+		
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/todo.jsp");
+		// Forward the request and response objects
+		dispatcher.forward(request,response);	
+	
 	}
 }

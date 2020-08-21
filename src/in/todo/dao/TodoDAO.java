@@ -7,4 +7,6 @@ public interface TodoDAO {
 	List<Todo> getList();
 	boolean addItem(Todo item);
 	boolean delete(int id);
+	Todo editItem(int id);
+	boolean updateItem(Todo item);
 }
